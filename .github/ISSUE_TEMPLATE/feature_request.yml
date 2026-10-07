@@ -1,0 +1,27 @@
+name: 功能建议
+description: 建议增加新的参数、快捷操作或界面体验
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你遇到的问题
+      description: 说明当前操作为什么不方便。
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 你希望怎么改
+      description: 描述期望的界面行为或命令行行为。
+    validations:
+      required: true
+
+  - type: input
+    id: upstream
+    attributes:
+      label: 相关上游参数
+      description: 如建议对应 DanmakuFactory 的某个 CLI 参数，请填写参数名。

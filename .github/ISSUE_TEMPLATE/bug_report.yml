@@ -1,0 +1,72 @@
+name: Bug 报告
+description: 报告界面、参数生成、配置读写或运行行为的问题
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请尽量提供可复现的信息。截图和完整命令行通常比一句描述更有帮助。
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows 版本
+      description: 例如 Windows 11 24H2
+    validations:
+      required: true
+
+  - type: input
+    id: powershell
+    attributes:
+      label: PowerShell 版本
+      description: 在 PowerShell 中运行 `$PSVersionTable.PSVersion` 获取
+    validations:
+      required: true
+
+  - type: input
+    id: danmaku_version
+    attributes:
+      label: DanmakuFactory 版本
+      description: 运行 `DanmakuFactory.exe -h` 获取，例如 1.70
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开 ...
+        2. 设置 ...
+        3. 点击 ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: 命令行预览或日志
+      description: 如涉及参数生成或运行失败，请粘贴完整命令行和日志。
+      render: text
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充信息
+      description: 可附上截图、DPI 缩放比例、输入文件格式等。

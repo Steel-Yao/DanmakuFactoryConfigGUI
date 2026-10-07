@@ -1,0 +1,47 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  powershell:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse PowerShell script
+        shell: pwsh
+        run: |
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Join-Path $PWD 'DanmakuFactoryGUI.ps1'),
+            [ref]$null,
+            [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | Format-Table -AutoSize
+            throw 'PowerShell syntax check failed.'
+          }
+          Write-Host 'PowerShell syntax OK.'
+
+      - name: Check required files
+        shell: pwsh
+        run: |
+          $required = @(
+            'DanmakuFactoryGUI.ps1',
+            'DanmakuFactoryGUI.cmd',
+            'README.md',
+            'LICENSE'
+          )
+          foreach ($path in $required) {
+            if (-not (Test-Path -LiteralPath $path)) {
+              throw "Missing required file: $path"
+            }
+          }
+          Write-Host 'Required files OK.'
